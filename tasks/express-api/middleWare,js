@@ -1,0 +1,16 @@
+const express = require("express");
+const app = express();
+
+app.get("/", throwMiddleWare, (req, res) => {
+  console.log("Hitting this endpoint");
+});
+
+function throwMiddleWare(req, res, next) {
+  const error = new Error("Error!");
+  next(error);
+}
+
+const addToRequest = (req, res, next) => {
+  req.new = "New value";
+  next();
+};
